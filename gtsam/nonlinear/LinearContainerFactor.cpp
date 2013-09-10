@@ -188,12 +188,22 @@ GaussianFactor::shared_ptr LinearContainerFactor::linearize(
 
 /* ************************************************************************* */
 bool LinearContainerFactor::isJacobian() const {
+// implicit conversion from shared_ptr to bool is disabled in C++ 11
+#if __cplusplus == 201103L
+  return (boost::dynamic_pointer_cast<JacobianFactor>(factor_).get() != nullptr);
+#else
   return boost::dynamic_pointer_cast<JacobianFactor>(factor_);
+#endif
 }
 
 /* ************************************************************************* */
 bool LinearContainerFactor::isHessian() const {
+// implicit conversion from shared_ptr to bool is disabled in C++ 11
+#if __cplusplus == 201103L
+  return (boost::dynamic_pointer_cast<HessianFactor>(factor_).get() != nullptr);
+#else
   return boost::dynamic_pointer_cast<HessianFactor>(factor_);
+#endif
 }
 
 /* ************************************************************************* */
