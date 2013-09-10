@@ -99,7 +99,7 @@ HessianFactor::HessianFactor(Index j, const Matrix& G, const Vector& g, double f
           GaussianFactor(j), info_(matrix_) {
   if(G.rows() != G.cols() || G.rows() != g.size())
     throw invalid_argument("Inconsistent matrix and/or vector dimensions in HessianFactor constructor");
-  size_t dims[] = { G.rows(), 1 };
+  long dims[] = { G.rows(), 1 };
   InfoMatrix fullMatrix(G.rows() + 1, G.rows() + 1);
   BlockInfo infoMatrix(fullMatrix, dims, dims+2);
   infoMatrix(0,0) = G;
@@ -119,7 +119,7 @@ HessianFactor::HessianFactor(Index j, const Vector& mu, const Matrix& Sigma) :
   Matrix G = inverse(Sigma);
   Vector g = G * mu;
   double f = dot(mu, g);
-  size_t dims[] = { G.rows(), 1 };
+  long dims[] = { G.rows(), 1 };
   InfoMatrix fullMatrix(G.rows() + 1, G.rows() + 1);
   BlockInfo infoMatrix(fullMatrix, dims, dims + 2);
   infoMatrix(0, 0) = G;
@@ -137,7 +137,7 @@ HessianFactor::HessianFactor(Index j1, Index j2,
   if(G11.rows() != G11.cols() || G11.rows() != G12.rows() || G11.rows() != g1.size() ||
       G22.cols() != G12.cols() || G22.cols() != g2.size())
     throw invalid_argument("Inconsistent matrix and/or vector dimensions in HessianFactor constructor");
-  size_t dims[] = { G11.rows(), G22.rows(), 1 };
+  long dims[] = { G11.rows(), G22.rows(), 1 };
   InfoMatrix fullMatrix(G11.rows() + G22.rows() + 1, G11.rows() + G22.rows() + 1);
   BlockInfo infoMatrix(fullMatrix, dims, dims+3);
   infoMatrix(0,0) = G11;
@@ -159,7 +159,7 @@ HessianFactor::HessianFactor(Index j1, Index j2, Index j3,
   if(G11.rows() != G11.cols() || G11.rows() != G12.rows() || G11.rows() != G13.rows()  || G11.rows() != g1.size() ||
       G22.cols() != G12.cols() || G33.cols() != G13.cols() ||  G22.cols() != g2.size() || G33.cols() != g3.size())
     throw invalid_argument("Inconsistent matrix and/or vector dimensions in HessianFactor constructor");
-  size_t dims[] = { G11.rows(), G22.rows(), G33.rows(), 1 };
+  long dims[] = { G11.rows(), G22.rows(), G33.rows(), 1 };
   InfoMatrix fullMatrix(G11.rows() + G22.rows() + G33.rows() + 1, G11.rows() + G22.rows() + G33.rows() + 1);
   BlockInfo infoMatrix(fullMatrix, dims, dims+4);
   infoMatrix(0,0) = G11;

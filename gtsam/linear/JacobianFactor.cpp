@@ -79,7 +79,7 @@ namespace gtsam {
 
   /* ************************************************************************* */
   JacobianFactor::JacobianFactor(const Vector& b_in) : Ab_(matrix_) {
-    size_t dims[] = { 1 };
+    long dims[] = { 1 };
     Ab_.copyStructureFrom(BlockAb(matrix_, dims, dims+1, b_in.size()));
     getb() = b_in;
     model_ = noiseModel::Unit::Create(this->rows());
@@ -94,7 +94,7 @@ namespace gtsam {
     if(model->dim() != (size_t) b.size())
       throw InvalidNoiseModel(b.size(), model->dim());
 
-    size_t dims[] = { A1.cols(), 1};
+    long dims[] = { A1.cols(), 1};
     Ab_.copyStructureFrom(BlockAb(matrix_, dims, dims+2, b.size()));
     Ab_(0) = A1;
     getb() = b;
@@ -109,7 +109,7 @@ namespace gtsam {
     if(model->dim() != (size_t) b.size())
       throw InvalidNoiseModel(b.size(), model->dim());
 
-    size_t dims[] = { A1.cols(), A2.cols(), 1};
+    long dims[] = { A1.cols(), A2.cols(), 1};
     Ab_.copyStructureFrom(BlockAb(matrix_, dims, dims+3, b.size()));
     Ab_(0) = A1;
     Ab_(1) = A2;
@@ -125,7 +125,7 @@ namespace gtsam {
     if(model->dim() != (size_t) b.size())
       throw InvalidNoiseModel(b.size(), model->dim());
 
-    size_t dims[] = { A1.cols(), A2.cols(), A3.cols(), 1};
+    long dims[] = { A1.cols(), A2.cols(), A3.cols(), 1};
     Ab_.copyStructureFrom(BlockAb(matrix_, dims, dims+4, b.size()));
     Ab_(0) = A1;
     Ab_(1) = A2;
