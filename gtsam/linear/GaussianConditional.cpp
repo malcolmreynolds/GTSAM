@@ -46,7 +46,7 @@ GaussianConditional::GaussianConditional(Index key) : IndexConditional(key), rsd
 GaussianConditional::GaussianConditional(Index key,const Vector& d, const Matrix& R, const Vector& sigmas) :
       IndexConditional(key), rsd_(matrix_), sigmas_(sigmas) {
   assert(R.rows() <= R.cols());
-  size_t dims[] = { R.cols(), 1 };
+  long dims[] = { R.cols(), 1 };
   rsd_.copyStructureFrom(rsd_type(matrix_, dims, dims+2, d.size()));
   rsd_(0) = R.triangularView<Eigen::Upper>();
   get_d_() = d;
@@ -57,7 +57,7 @@ GaussianConditional::GaussianConditional(Index key, const Vector& d, const Matri
     Index name1, const Matrix& S, const Vector& sigmas) :
     IndexConditional(key,name1), rsd_(matrix_), sigmas_(sigmas) {
   assert(R.rows() <= R.cols());
-  size_t dims[] = { R.cols(), S.cols(), 1 };
+  long dims[] = { R.cols(), S.cols(), 1 };
   rsd_.copyStructureFrom(rsd_type(matrix_, dims, dims+3, d.size()));
   rsd_(0) = R.triangularView<Eigen::Upper>();
   rsd_(1) = S;
@@ -69,7 +69,7 @@ GaussianConditional::GaussianConditional(Index key, const Vector& d, const Matri
     Index name1, const Matrix& S, Index name2, const Matrix& T, const Vector& sigmas) :
     IndexConditional(key,name1,name2), rsd_(matrix_), sigmas_(sigmas) {
   assert(R.rows() <= R.cols());
-  size_t dims[] = { R.cols(), S.cols(), T.cols(), 1 };
+  long dims[] = { R.cols(), S.cols(), T.cols(), 1 };
   rsd_.copyStructureFrom(rsd_type(matrix_, dims, dims+4, d.size()));
   rsd_(0) = R.triangularView<Eigen::Upper>();
   rsd_(1) = S;
